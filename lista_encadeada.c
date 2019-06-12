@@ -17,21 +17,28 @@ int Vazia(TipoLista Lista){
 }
 
 void Insere(Item *x, TipoLista *Lista){
-  if(existe_lista(x, Lista) == 0){
-    Lista -> qtd++;
-    return;
-  }
-  if(Lista -> Primeiro == NULL){
-    Lista -> Primeiro = (TipoApontador)malloc(sizeof(TipoCelula));
-    Lista -> Primeiro -> item = x;
-    Lista -> Ultimo = Lista -> Primeiro;
-    Lista -> Ultimo -> Prox = NULL;
-  }
-  Lista -> Ultimo -> Prox = (TipoApontador)malloc(sizeof(TipoCelula));
-  Lista -> Ultimo = Lista -> Ultimo -> Prox;
-  Lista -> Ultimo -> item = x;
-  Lista -> Ultimo -> Prox = NULL;
-  return;
+  TipoApontador aux;
+  aux = Lista -> Primeiro;
+    while(aux != NULL){
+      if(strcmp(aux -> item -> palavra, x -> palavra) == 0){
+        aux -> item -> qtd++;
+        return;
+      }
+      aux = aux -> Prox;
+    }
+
+      if(Lista -> Primeiro == NULL){
+        Lista -> Primeiro = (TipoApontador)malloc(sizeof(TipoCelula));
+        Lista -> Primeiro -> item = x;
+        Lista -> Ultimo = Lista -> Primeiro;
+        Lista -> Ultimo -> Prox = NULL;
+        return;
+      }
+        Lista -> Ultimo -> Prox = (TipoApontador)malloc(sizeof(TipoCelula));
+        Lista -> Ultimo = Lista -> Ultimo -> Prox;
+        Lista -> Ultimo -> item = x;
+        Lista -> Ultimo -> Prox = NULL;
+
 }
 
 void ImprimeLista(TipoLista *Lista, Item *x){
@@ -45,6 +52,7 @@ void ImprimeLista(TipoLista *Lista, Item *x){
     }
     aux = aux -> Prox;
   }
+  printf("ERRO! PALAVRA NAO ENCONTRADA\n");
 }
 
 Item* criaPalavra(int tamanho, char *palavra){
@@ -56,27 +64,14 @@ Item* criaPalavra(int tamanho, char *palavra){
   return i;
 }
 
-int existe_lista(Item *x, TipoLista *Lista){
+void liberdade_lista(TipoLista *Lista){
   TipoApontador aux;
-  aux = Lista -> Primeiro;
-    while(aux != NULL){
-      if(strcmp(aux -> item -> palavra, x -> palavra) == 0){
-        return 0;
-      }
-      aux = aux -> Prox;
-    }
-      return 1;
-}
-
-void liberdade_lista(TipoLista *Lista, int tam){
-  TipoApontador aux, aux2;
-  int i;
-  aux = Lista -> Primeiro;
-  while(aux != NULL){
-    aux2 = aux;
-    free(aux2 -> item -> palavra);
-    free(aux2 -> item);
-    free(aux2);
-    aux = aux -> Prox;
+  while(Lista->Primeiro != NULL){
+    aux = Lista->Primeiro;
+    Lista->Primeiro = Lista->Primeiro->Prox;
+    free(aux->item->palavra);
+    free(aux -> item);
+    free(aux);
   }
+  free(Lista);
 }

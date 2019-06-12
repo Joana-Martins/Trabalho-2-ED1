@@ -35,8 +35,6 @@ void ImprimeLista(TipoLista *Lista, Item *x);
 
 Item* criaPalavra(int tamanho, char *palavra);
 
-int existe_lista(Item *x, TipoLista *Lista);
-
-void liberdade_lista(TipoLista *Lista, int tamanho);
+void liberdade_lista(TipoLista *Lista);
 
 #endif //LISTA_ENCADEADA_H_
