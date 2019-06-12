@@ -14,10 +14,11 @@ void main(){
     i++;
   }
   Item *procura;
-  procura = criaPalavra(3, "oi");
+  procura = criaPalavra(2, "oi");
   ImprimeLista(lista, procura);
   liberdade_lista(lista);
   free(p);
+  free(procura -> palavra);
   free(procura);
   free(aux -> palavra);
   free(aux);

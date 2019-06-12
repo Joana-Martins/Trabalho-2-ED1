@@ -57,8 +57,8 @@ void ImprimeLista(TipoLista *Lista, Item *x){
 
 Item* criaPalavra(int tamanho, char *palavra){
   Item* i;
-  i = malloc(sizeof(Item));
-  i -> palavra = malloc(tamanho+1 * sizeof(char));
+  i = (Item*)malloc(sizeof(Item));
+  i -> palavra = (char*)malloc((tamanho+1) * sizeof(char));
   strcpy(i -> palavra, palavra);
   i -> qtd = 1;
   return i;
