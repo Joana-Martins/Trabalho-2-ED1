@@ -7,7 +7,7 @@
 
 typedef struct item{
   char *palavra;
-  int qtd;
+  int posicao;
 }Item;
 
 typedef struct Celula* TipoApontador;
@@ -19,6 +19,7 @@ typedef struct Celula{
 
 typedef struct{
   TipoApontador Primeiro, Ultimo;
+  int posicao;
 }TipoLista;
 
 TipoLista *FLVazia();
@@ -29,11 +30,11 @@ void Insere(Item *x, TipoLista *Lista);
 
 //void Retira(TipoLista *Lista, Produto *Item);
 
-void ImprimeLista(TipoLista *Lista, Item *x);
+void Procura(TipoLista *Lista, Item *x);
 
 //int Quantidade(TipoLista Lista);
 
-Item* criaPalavra(int tamanho, char *palavra);
+Item* criaPalavra(char *palavra);
 
 void liberdade_lista(TipoLista *Lista);
 

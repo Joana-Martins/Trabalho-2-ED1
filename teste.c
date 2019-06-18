@@ -1,4 +1,5 @@
 #include "lista_encadeada.h"
+#include <stdlib.h>
 
 void main(){
   TipoLista *lista;
@@ -9,17 +10,15 @@ void main(){
   int i = 0;
   while(i != 10){
     scanf("%s", p);
-    aux = criaPalavra(strlen(p), p);
+    aux = criaPalavra(p);
     Insere(aux, lista);
     i++;
   }
   Item *procura;
-  procura = criaPalavra(2, "oi");
-  ImprimeLista(lista, procura);
+  procura = criaPalavra("oi");
+  Procura(lista, procura);
   liberdade_lista(lista);
   free(p);
   free(procura -> palavra);
   free(procura);
-  free(aux -> palavra);
-  free(aux);
 }
