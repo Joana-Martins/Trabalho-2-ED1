@@ -16,7 +16,7 @@ char** matriz_arquivos(){
       printf("Digite o nome do arquivo: ");
       scanf("%s", arquivo);
       scanf("%s", opcao);
-      if((strcmp(opcao, "prox") != 0) || (strcmp(opcao, "sair") != 0)){
+      if((strcmp(opcao, "prox") != 0) && (strcmp(opcao, "sair") != 0)){
         printf("Entrada inválida. Por favor digite novamente!\n");
         scanf("%s", opcao);
         }

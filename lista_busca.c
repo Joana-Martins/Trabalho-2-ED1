@@ -2,6 +2,7 @@
 
 void lista_de_busca(char **arquivos, Item *procurando){
   TipoLista *lista;
+  lista = FLVazia();
   char *aux = malloc(47*sizeof(char));
   int i = 0;
   int tam = arquivos[0][0];
@@ -13,8 +14,11 @@ void lista_de_busca(char **arquivos, Item *procurando){
           item = criaPalavra(aux);
           Insere(item, lista);
       }
+      printf("%s ", arquivos[i]);
+      Procura(lista, procurando);
+      printf("\n");
   }
 
-  Procura(lista, procurando);
+
   liberdade_lista(lista);
 }

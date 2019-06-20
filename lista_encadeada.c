@@ -44,10 +44,10 @@ void Procura(TipoLista *Lista, Item *x){
   TipoApontador aux;
   int contador = 0;
   aux = Lista -> Primeiro;
-  printf("%s ", x -> palavra);
+  // printf("%s ", x -> palavra);
   while(aux != NULL){
     if(strcmp(aux -> item -> palavra, x -> palavra) == 0){
-      printf("%i ", aux -> item -> posicao);
+      printf("%i,", aux -> item -> posicao);
       contador++;
     }
     aux = aux -> Prox;
