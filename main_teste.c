@@ -4,6 +4,7 @@
 
 void main(){
   char **arquivos;
+  int w = 0;
   char *procurar = malloc(47 * sizeof(char));
   Item *i;
   arquivos = matriz_arquivos();
@@ -11,5 +12,11 @@ void main(){
   scanf("%s", procurar);
   i = criaPalavra(procurar);
   lista_de_busca(arquivos, i);
+  for(w = 0; w < 100; w++){
+    free(arquivos[w]);
+  }
+  free(i -> palavra);
+  free(i);
+  free(arquivos);
   free(procurar);
 }

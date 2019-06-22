@@ -6,25 +6,29 @@ char** matriz_arquivos(){
   int i = 0, j=1, w = 0;
   arquivo = malloc(70 * sizeof(char));
   opcao = malloc (5 * sizeof(char));
-  arquivos = malloc(100 * sizeof(char));
+  arquivos = malloc(100 * sizeof(char*));
     for(w = 0; w < 100; w++){
       arquivos[w]= malloc(70 * sizeof(char));
     }
+
     do{
-      printf("Digite 'sair' para terminar\n");
-      printf("Digite 'prox' para adicionar mais arquivos\n");
       printf("Digite o nome do arquivo: ");
       scanf("%s", arquivo);
+      printf("Digite 'sair' para terminar\n");
+      printf("Digite 'prox' para adicionar mais arquivos\n");
       scanf("%s", opcao);
       if((strcmp(opcao, "prox") != 0) && (strcmp(opcao, "sair") != 0)){
         printf("Entrada inválida. Por favor digite novamente!\n");
         scanf("%s", opcao);
         }
-        system("clear");
+        //system("clear");
         strcpy(arquivos[j],arquivo);
         j++;
     }while(strcmp("sair",opcao) != 0);
+
     arquivos[0][0] = j;
+    free(opcao);
+    free(arquivo);
     return arquivos;
 }
 

@@ -3,22 +3,28 @@
 void lista_de_busca(char **arquivos, Item *procurando){
   TipoLista *lista;
   lista = FLVazia();
-  char *aux = malloc(47*sizeof(char));
+  char *aux =(char*) malloc(47*sizeof(char));
   int i = 0;
   int tam = arquivos[0][0];
   FILE *l;
-  Item *item = malloc(sizeof(Item));
+  Item *item; 
   for(i = 1; i < tam; i++){
       l = fopen(arquivos[i], "r");
-      while(fscanf(l, "%s", aux) != EOF){
-          item = criaPalavra(aux);
-          Insere(item, lista);
+      if(l == NULL){
+        printf("Arquivo %s e invalido\n", arquivos[i]);
+      }else{
+        while(fscanf(l, "%s", aux) != EOF){
+            item = criaPalavra(aux);
+            Insere(item, lista);
+        }
+        printf("%s ", arquivos[i]);
+        Procura(lista, procurando);
+        printf("\n");
+        liberdade_lista(lista);
+        fclose(l);
+        lista = FLVazia();
       }
-      printf("%s ", arquivos[i]);
-      Procura(lista, procurando);
-      printf("\n");
   }
-
-
+  free(aux);
   liberdade_lista(lista);
 }
