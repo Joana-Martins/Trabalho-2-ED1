@@ -5,14 +5,14 @@
 #include <stdio.h>
 #include <string.h>
 
-typedef struct item{
+typedef struct info{
   char *palavra;
   int posicao;
-}Item;
+}Info;
 
 struct NO{
   int posicao;
-  Item item;
+  Info info;
   struct NO *esq;
   struct NO *dir;
 };

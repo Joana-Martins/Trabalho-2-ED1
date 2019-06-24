@@ -8,14 +8,14 @@ ArvBin* cria_ArvBin(){
   return raiz;
 }
 
-int insere_ArvBin(ArvBin* raiz, Item i){
+int insere_ArvBin(ArvBin* raiz, Info i){
   if(*raiz == NULL){
     *raiz = malloc(sizeof(struct NO));
     (*raiz) -> dir = NULL;
     (*raiz) -> esq = NULL;
     (*raiz) -> posicao++;
-    (*raiz) -> item -> palavra = (char*)malloc((strlen(i->palavra)+1)*sizeof(char));
-    strcpy((*raiz) -> item -> palavra, i->palavra);
+    (*raiz) -> info -> palavra = (char*)malloc((strlen(i->palavra)+1)*sizeof(char));
+    strcpy((*raiz) -> info -> palavra, i->palavra);
     (*raiz) -> item -> posicao = (*raiz) -> posicao;
 
   }
@@ -29,6 +29,7 @@ return 0;
 }
 
 int consulta_ArvBin(ArvBin *raiz, char *procura){
+  
 
 }
 

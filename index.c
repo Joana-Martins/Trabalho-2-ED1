@@ -11,7 +11,7 @@ int main(int argc, char* argv[]){
   printf("\nDigite a palavra a ser buscada: ");
   scanf(" %s", procurar);
   i = criaPalavra(procurar);
-  printf("Lista encadeada: \n")
+  printf("Lista encadeada: \n");
   lista_de_busca(arquivos, i, tam);
   free(procurar);
   free(i->palavra);
