@@ -13,13 +13,14 @@ int main(int argc, char* argv[]){
   i = criaPalavra(procurar);
   printf("Lista encadeada: \n");
   lista_de_busca(arquivos, i, tam);
+  printf("Arvore Binária:\n");
+  consulta_ArvBin(procurar, arquivos, tam);
   free(procurar);
   free(i->palavra);
   free(i);
 
-
-
   for(int i=0;i<tam;i++)free(arquivos[i]);
   free(arquivos);
+
   return 0;
 }

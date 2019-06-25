@@ -13,7 +13,7 @@ typedef struct info{
 
 struct NO{
   int posicao;
-  Info info;
+  Info *info;
   struct NO *esq;
   struct NO *dir;
 };
@@ -22,18 +22,14 @@ typedef struct NO* ArvBin;
 
 ArvBin* cria_ArvBin();
 
-int insere_ArvBin(ArvBin* raiz, int valor);
+int insere_ArvBin(ArvBin* raiz, char *p);
 
-int consulta_ArvBin(ArvBin *raiz, char *procura);
-
-//void preOrdem_ArvBin(ArvBin *raiz);
-
-//void emOrdem_ArvBin(ArvBin *raiz);
-
-//void posOrdem_ArvBin(ArvBin *raiz);
+int Procura_ArvBin(ArvBin *raiz, char *procura);
 
 void libera_NO(struct NO* no);
 
 void libera_ArvBin(ArvBin *raiz);
+
+void consulta_ArvBin(char *procura, char **arquivos, int tamanho);
 
 #endif //ARVORE_BINARIA_NB_H_
