@@ -7,7 +7,8 @@
 
 typedef struct info{
   char *palavra;
-  int posicao;
+  int indice;
+  int *posicoes;
 }Info;
 
 struct NO{

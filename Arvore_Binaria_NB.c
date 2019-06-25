@@ -16,20 +16,25 @@ int insere_ArvBin(ArvBin* raiz, Info i){
     (*raiz) -> posicao++;
     (*raiz) -> info -> palavra = (char*)malloc((strlen(i->palavra)+1)*sizeof(char));
     strcpy((*raiz) -> info -> palavra, i->palavra);
-    (*raiz) -> item -> posicao = (*raiz) -> posicao;
+    (*raiz) -> info -> indices = 0;
+
 
   }
-  if(valor < (*raiz) -> info){
+  if(strcmp(i -> palavra, (*raiz) -> info) < 0){
     return insere_ArvBin(&((*raiz)-> esq), i);
   }
-  if(valor > (*raiz) -> info){
+  if(strcmp(i -> palavra, (*raiz) -> info) > 0){
     return insere_ArvBin(&((*raiz)-> dir), i);
+  }
+  if(strcmp(i -> palavra, (*raiz) -> info) == 0){
+    (*raiz) -> info -> posicoes[(*raiz) -> info -> indice] = (*raiz) -> posicao;
+    (*raiz) -> info -> indice++;
   }
 return 0;
 }
 
 int consulta_ArvBin(ArvBin *raiz, char *procura){
-  
+
 
 }
 
