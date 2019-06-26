@@ -8,11 +8,10 @@
 typedef struct info{
   char *palavra;
   int indice;
-  int *posicoes;
+  long int *posicoes;
 }Info;
 
 struct NO{
-  int posicao;
   Info *info;
   struct NO *esq;
   struct NO *dir;
@@ -22,7 +21,7 @@ typedef struct NO* ArvBin;
 
 ArvBin* cria_ArvBin();
 
-int insere_ArvBin(ArvBin* raiz, char *p);
+int insere_ArvBin(ArvBin* raiz, char *p, FILE *f);
 
 int Procura_ArvBin(ArvBin *raiz, char *procura);
 

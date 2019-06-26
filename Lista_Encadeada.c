@@ -2,7 +2,6 @@
 
 TipoLista *FLVazia(){
   TipoLista *Lista = malloc(sizeof(TipoLista));
-  Lista -> posicao = 0;
   Lista -> Primeiro = NULL;
   Lista -> Ultimo = NULL;
   return Lista;
@@ -12,23 +11,21 @@ int Vazia(TipoLista *Lista){
   return (Lista->Primeiro == Lista->Ultimo); //se vazia, retorna 0.
 }
 
-void Insere(Item *x, TipoLista *Lista){
+void Insere(Item *x, TipoLista *Lista, FILE *f){
 if(Lista -> Primeiro == NULL){
-  Lista -> posicao++;
   Lista -> Primeiro = (TipoApontador)malloc(sizeof(TipoCelula));
   Lista -> Primeiro -> item = x;
-  Lista -> Primeiro -> item -> posicao = Lista -> posicao;
+  Lista -> Primeiro -> item -> posicao = ftell(f);
   Lista -> Ultimo = Lista -> Primeiro;
   Lista -> Primeiro -> Prox = NULL;
   Lista -> Ultimo -> Prox = Lista -> Primeiro -> Prox;
   return;
   }
 
-  Lista -> posicao++;
   Lista -> Ultimo -> Prox = (TipoApontador)malloc(sizeof(TipoCelula));
   Lista -> Ultimo = Lista -> Ultimo -> Prox;
   Lista -> Ultimo -> item = x;
-  Lista -> Ultimo -> item -> posicao = Lista -> posicao;
+  Lista -> Ultimo -> item -> posicao = ftell(f);
   Lista -> Ultimo -> Prox = NULL;
 }
 
@@ -38,7 +35,7 @@ void Procura(TipoLista *Lista, Item *x){
   aux = Lista -> Primeiro;
   while(aux != NULL){
     if(strcmp(aux -> item -> palavra, x -> palavra) == 0){
-      printf("%i ", aux -> item -> posicao);
+      printf("%ld ", aux -> item -> posicao);
       contador++;
     }
     aux = aux -> Prox;
@@ -84,8 +81,8 @@ void lista_de_busca(char **arquivos, Item *procurando, int tam){
         palavra=malloc(strlen(aux)+1);
         strcpy(palavra,aux);
         item = criaPalavra(aux);
-        Insere(item, lista);
-        free(palavra);   
+        Insere(item, lista, l);
+        free(palavra);
       }
       printf("%s ", arquivos[i]);
       Procura(lista, procurando);
