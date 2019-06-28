@@ -1,6 +1,7 @@
 #include "Lista_Encadeada.h"
 #include "Biblioteca_Leitura_Arquivos.h"
 #include "Arvore_Binaria_NB.h"
+#include "Arvore_AVL.h"
 
 int main(int argc, char* argv[]){
   //int qtdBusca = atoi(argv[1]);
@@ -18,7 +19,8 @@ int main(int argc, char* argv[]){
   free(procurar);
   free(i->palavra);
   free(i);
-
+  ArvBin *sla = cria_ArvBin();
+  int x = estaVazia_ArvAVL(sla);
   for(int i=0;i<tam;i++)free(arquivos[i]);
   free(arquivos);
 

@@ -13,6 +13,7 @@ typedef struct info{
 
 struct NO{
   Info *info;
+  int altura;
   struct NO *esq;
   struct NO *dir;
 };
