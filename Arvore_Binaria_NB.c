@@ -16,9 +16,8 @@ int insere_ArvBin(ArvBin* raiz, char *p, FILE *f){
     strcpy((*raiz) -> info -> palavra, p);
     (*raiz) -> info -> posicoes = malloc(1000 * sizeof(long int));
     (*raiz) -> info -> indice = 0;
-
-
   }
+
   if(strcmp(p, (*raiz) -> info -> palavra) < 0){
     return insere_ArvBin(&((*raiz)-> esq), p, f);
   }
@@ -53,19 +52,19 @@ void libera_ArvBin(ArvBin *raiz){
   free(raiz);
 }
 
-int Procura_ArvBin(ArvBin *raiz, char *procura){
+int Procura_ArvBin(ArvBin *raiz, char *procura, int tam){
   int i;
   if(strcmp(((*raiz) -> info -> palavra), procura) == 0){
-    for(i = 0; i < (*raiz) -> info -> indice; i++){
-      printf("%ld ", (*raiz) -> info -> posicoes[i]);
+    for(i = 0; i < tam; i++){
+      printf("%ld ", (*raiz) -> info -> posicoes[i] - strlen(procura)+1);
     }
     return 0;
   }
   if(strcmp(procura, (*raiz) -> info -> palavra) < 0){
-    return Procura_ArvBin(&((*raiz)-> esq), procura);
+    return Procura_ArvBin(&((*raiz)-> esq), procura, tam);
   }
   if(strcmp(procura, (*raiz) -> info -> palavra) > 0){
-    return Procura_ArvBin(&((*raiz)-> dir), procura);
+    return Procura_ArvBin(&((*raiz)-> dir), procura, tam);
   }
   return 0;
 }
@@ -83,7 +82,7 @@ void consulta_ArvBin(char *procura, char **arquivos, int tam){
           insere_ArvBin(raiz, aux, l);
         }
         printf("%s ", arquivos[i]);
-        Procura_ArvBin(raiz, procura);
+        Procura_ArvBin(raiz, procura, (*raiz) -> info -> indice);
         printf("\n");
         libera_ArvBin(raiz);
         fclose(l);

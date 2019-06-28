@@ -16,11 +16,12 @@ int main(int argc, char* argv[]){
   lista_de_busca(arquivos, i, tam);
   printf("Arvore Binária:\n");
   consulta_ArvBin(procurar, arquivos, tam);
+  printf("Arvore Balanceada:\n");
+  consulta_ArvAVL(procurar, arquivos, tam);
+
   free(procurar);
   free(i->palavra);
   free(i);
-  ArvBin *sla = cria_ArvBin();
-  int x = estaVazia_ArvAVL(sla);
   for(int i=0;i<tam;i++)free(arquivos[i]);
   free(arquivos);
 

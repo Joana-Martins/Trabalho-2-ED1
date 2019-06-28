@@ -35,7 +35,7 @@ void Procura(TipoLista *Lista, Item *x){
   aux = Lista -> Primeiro;
   while(aux != NULL){
     if(strcmp(aux -> item -> palavra, x -> palavra) == 0){
-      printf("%ld ", aux -> item -> posicao);
+      printf("%ld ", aux -> item -> posicao - strlen(x -> palavra)+1);
       contador++;
     }
     aux = aux -> Prox;

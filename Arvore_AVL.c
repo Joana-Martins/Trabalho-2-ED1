@@ -13,8 +13,8 @@ int fatorBalanceamento_NO(struct NO* no){
 
 }
 
-Info maior(Info x, Info y){
-  if (strcmp(x.palavra, y.palavra) > 0){
+int maior(int x, int y){
+  if (x > y){
     return x;
   }else{
     return y;
@@ -35,7 +35,7 @@ int totalNO_ArvAVL(ArvBin *raiz){
   if(raiz == NULL){
     return 0;
   }
-  if(*raiz == NULL){
+  if((*raiz) == NULL){
     return 0;
   }
   int alt_esq = totalNO_ArvAVL(&((*raiz)->esq));
@@ -47,7 +47,7 @@ int altura_ArvAVL(ArvBin *raiz){
   if(raiz == NULL){
     return 0;
   }
-  if(*raiz = NULL){
+  if(*raiz == NULL){
     return 0;
   }
   int alt_esq = altura_ArvAVL(&((*raiz) -> esq));
@@ -92,19 +92,19 @@ void RotacaoRL(ArvBin *A){
 }
 
 int insere_ArvAVL(ArvBin *raiz, char *valor, FILE *l){
-  char *res;
-
   if(*raiz == NULL){
-    struct NO *novo.
+    struct NO *novo;
     novo = (struct NO*)malloc(sizeof(struct NO));
     if(novo == NULL){
-      return;
+      return 1;
     }
 
+    novo -> info = (Info*) malloc (sizeof(Info));
     novo -> info -> palavra = (char*)malloc(47 * sizeof(char));
     novo -> info -> posicoes = (long int*)malloc(1000 *sizeof(long int));
     strcpy(novo -> info -> palavra, valor);
     novo -> info -> indice = 0;
+    novo -> info -> posicoes[novo -> info -> indice] = ftell(l);
     novo -> altura = 0;
     novo -> esq = 0;
     novo -> dir = NULL;
@@ -113,10 +113,10 @@ int insere_ArvAVL(ArvBin *raiz, char *valor, FILE *l){
   }
 
   struct NO *atual = *raiz;
-  if(strcmp(valor -> , (*raiz) -> info -> palavra) < 0){
-    if(insere_ArvAVL(&(atual -> esq), valor) == 1){
+  if(strcmp(valor, (*raiz) -> info -> palavra) < 0){
+    if(insere_ArvAVL(&(atual -> esq), valor, l) == 1){
       if(fatorBalanceamento_NO(atual) >= 2){
-        if(strcmp(valor -> , (*raiz) -> esq -> info -> palavra) < 0){
+        if(strcmp(valor, (*raiz) -> esq -> info -> palavra) < 0){
           RotacaoLL(raiz);
         }else{
         RotacaoLR(raiz);
@@ -124,10 +124,10 @@ int insere_ArvAVL(ArvBin *raiz, char *valor, FILE *l){
       }
     }
   }else{
-    if(strcmp(valor -> , (*raiz) -> info -> palavra) < 0){
-      if(insere_ArvAVL(&(atual -> esq), valor) == 1){
+    if(strcmp(valor, (*raiz) -> info -> palavra) < 0){
+      if(insere_ArvAVL(&(atual -> dir), valor, l) == 1){
         if(fatorBalanceamento_NO(atual) >= 2){
-            if(strcmp(valor -> , (*raiz) -> dir -> info -> palavra) < 0){
+            if(strcmp(valor, (*raiz) -> dir -> info -> palavra) < 0){
               RotacaoRR(raiz);
             }else{
               RotacaoRL(raiz);
@@ -135,10 +135,36 @@ int insere_ArvAVL(ArvBin *raiz, char *valor, FILE *l){
         }
       }
     }else{
-      (*raiz) -> info -> posicoes[(*raiz) -> info -> indice] = ftell(l);
       (*raiz) -> info -> indice++;
+      (*raiz) -> info -> posicoes[(*raiz) -> info -> indice] = ftell(l);
       return 0;
     }
   }
   atual->altura = maior(altura_NO(atual->esq), altura_NO(atual->dir)) + 1;
+  return 0;
 }
+
+void consulta_ArvAVL(char *procura, char **arquivos, int tam){
+    ArvBin *raiz = cria_ArvBin();
+    FILE *l;
+    char *aux=malloc(47*sizeof(char));
+    int i;
+    for(i = 0; i < tam; i++){
+      l = fopen(arquivos[i], "r");
+      if(!l) printf("%s ARQUIVO INEXISTENTE\n", arquivos[i]);
+      else{
+        while(fscanf(l, "%s", aux) != EOF){
+          insere_ArvAVL(raiz, aux, l);
+        }
+        printf("%s ", arquivos[i]);
+        Procura_ArvBin(raiz, procura, (*raiz) -> info -> indice+1);
+        printf("\n");
+        libera_ArvBin(raiz);
+        fclose(l);
+        raiz = cria_ArvBin();
+      }
+    }
+    libera_ArvBin(raiz);
+    free(raiz);
+    free(aux);
+  }

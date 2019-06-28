@@ -11,7 +11,7 @@ int altura_NO(struct NO* no);
 
 int fatorBalanceamento_NO(struct NO* no);
 
-Info maior(Info x, Info y);
+int maior(int x, int y);
 
 int estaVazia_ArvAVL(ArvBin *raiz);
 
@@ -27,6 +27,8 @@ void RotacaoLR(ArvBin *A);
 
 void RotacaoRL(ArvBin *A);
 
-int insere_ArvAVL(ArvBin *raiz, Info valor);
+int insere_ArvAVL(ArvBin *raiz, char* valor, FILE *l);
+
+void consulta_ArvAVL(char *procura, char **arquivos, int tam);
 
 #endif //ARVORE_AVL_H_

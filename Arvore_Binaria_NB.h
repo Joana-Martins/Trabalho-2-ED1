@@ -24,7 +24,7 @@ ArvBin* cria_ArvBin();
 
 int insere_ArvBin(ArvBin* raiz, char *p, FILE *f);
 
-int Procura_ArvBin(ArvBin *raiz, char *procura);
+int Procura_ArvBin(ArvBin *raiz, char *procura, int tam);
 
 void libera_NO(struct NO* no);
 
