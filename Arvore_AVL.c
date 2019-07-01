@@ -101,7 +101,7 @@ int insere_ArvAVL(ArvBin *raiz, char *valor, FILE *l){
 
     novo -> info = (Info*) malloc (sizeof(Info));
     novo -> info -> palavra = (char*)malloc(47 * sizeof(char));
-    novo -> info -> posicoes = (long int*)malloc(1000 *sizeof(long int));
+    novo -> info -> posicoes = (long int*)malloc(100000 *sizeof(long int));
     strcpy(novo -> info -> palavra, valor);
     novo -> info -> indice = 0;
     novo -> info -> posicoes[novo -> info -> indice] = ftell(l);
