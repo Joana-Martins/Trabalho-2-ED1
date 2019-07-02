@@ -144,6 +144,22 @@ int insere_ArvAVL(ArvBin *raiz, char *valor, FILE *l){
   return 0;
 }
 
+void Procura_ArvAVL(ArvBin *raiz, char *procura){
+  int i;
+  if(strcmp(((*raiz) -> info -> palavra), procura) == 0){
+    for(i = 0; i < (*raiz)->info->indice + 1; i++){
+      printf("%ld ", (*raiz) -> info -> posicoes[i] - strlen(procura)+1);
+    }
+  }
+  if(strcmp(procura, (*raiz) -> info -> palavra) < 0){
+    return Procura_ArvAVL(&((*raiz)-> esq), procura);
+  }
+  if(strcmp(procura, (*raiz) -> info -> palavra) > 0){
+    return Procura_ArvAVL(&((*raiz)-> dir), procura);
+  }
+  // return 0;
+}
+
 void consulta_ArvAVL(char *procura, char **arquivos, int tam){
     ArvBin *raiz = cria_ArvBin();
     FILE *l;
@@ -157,7 +173,7 @@ void consulta_ArvAVL(char *procura, char **arquivos, int tam){
           insere_ArvAVL(raiz, aux, l);
         }
         printf("%s ", arquivos[i]);
-        Procura_ArvBin(raiz, procura, (*raiz) -> info -> indice+1);
+        Procura_ArvAVL(raiz, procura);
         printf("\n");
         libera_ArvBin(raiz);
         fclose(l);

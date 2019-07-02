@@ -52,28 +52,24 @@ void libera_ArvBin(ArvBin *raiz){
   free(raiz);
 }
 
-void Procura_ArvBin(ArvBin *raiz, char *procura, int tam){
+void Procura_ArvBin(ArvBin *raiz, char *procura){
   int i;
   if(strcmp(((*raiz) -> info -> palavra), procura) == 0){
-    printf("\n%i\n", (*raiz)->info->indice);
-    for(i = 0; i < tam; i++){
+    for(i = 0; i < (*raiz)->info->indice; i++){
       printf("%ld ", (*raiz) -> info -> posicoes[i] - strlen(procura)+1);
     }
-    printf("\n%i\n", (*raiz)->info->indice);// aq o indice e 4
-    // return 0;
   }
   if(strcmp(procura, (*raiz) -> info -> palavra) < 0){
-    return Procura_ArvBin(&((*raiz)-> esq), procura, tam);
+    return Procura_ArvBin(&((*raiz)-> esq), procura);
   }
   if(strcmp(procura, (*raiz) -> info -> palavra) > 0){
-    return Procura_ArvBin(&((*raiz)-> dir), procura, tam);
+    return Procura_ArvBin(&((*raiz)-> dir), procura);
   }
   // return 0;
 }
 
 void consulta_ArvBin(char *procura, char **arquivos, int tam){
     ArvBin *raiz = cria_ArvBin();
-    int t;
     FILE *l;
     char *aux=malloc(47*sizeof(char));
     int i;
@@ -85,9 +81,7 @@ void consulta_ArvBin(char *procura, char **arquivos, int tam){
           insere_ArvBin(raiz, aux, l);
         }
         printf("%s ", arquivos[i]);
-        printf("\n%i\n", (*raiz)->info->indice);// aq o indice e um
-        Procura_ArvBin(raiz, procura, (*raiz) -> info -> indice);
-          printf("dps: %i\n", (*raiz)->info->indice);
+        Procura_ArvBin(raiz, procura);
         printf("\n");
         libera_ArvBin(raiz);
         fclose(l);

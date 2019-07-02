@@ -29,6 +29,8 @@ void RotacaoRL(ArvBin *A);
 
 int insere_ArvAVL(ArvBin *raiz, char* valor, FILE *l);
 
+void Procura_ArvAVL(ArvBin *raiz, char *procura);
+
 void consulta_ArvAVL(char *procura, char **arquivos, int tam);
 
 #endif //ARVORE_AVL_H_
