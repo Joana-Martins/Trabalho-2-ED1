@@ -52,20 +52,14 @@ void libera_ArvBin(ArvBin *raiz){
   free(raiz);
 }
 
-void Procura_ArvBin(ArvBin *raiz, char *procura){
-  int i;
-  if(strcmp(((*raiz) -> info -> palavra), procura) == 0){
-    for(i = 0; i < (*raiz)->info->indice; i++){
-      printf("%ld ", (*raiz) -> info -> posicoes[i] - strlen(procura)+1);
-    }
+int Procura_ArvBin(ArvBin *raiz, char *procura){
+  struct NO* atual = *raiz;
+  while(atual != NULL){
+    if(strcmp(procura, atual->info->palavra)==0) return 1;
+    else if(procura < atual->info->palavra) atual = atual->esq;
+    else if(procura > atual->info->palavra) atual = atual->dir;
   }
-  if(strcmp(procura, (*raiz) -> info -> palavra) < 0){
-    return Procura_ArvBin(&((*raiz)-> esq), procura);
-  }
-  if(strcmp(procura, (*raiz) -> info -> palavra) > 0){
-    return Procura_ArvBin(&((*raiz)-> dir), procura);
-  }
-  // return 0;
+  return 0;
 }
 
 void consulta_ArvBin(char *procura, char **arquivos, int tam){
@@ -81,7 +75,12 @@ void consulta_ArvBin(char *procura, char **arquivos, int tam){
           insere_ArvBin(raiz, aux, l);
         }
         printf("%s ", arquivos[i]);
-        Procura_ArvBin(raiz, procura);
+        if(Procura_ArvBin(raiz, procura)==1){
+          for(int i = 0; i < (*raiz)->info->indice; i++){
+            printf("%ld ", (*raiz) -> info -> posicoes[i] - strlen(procura)+1);
+          }
+        }
+        if(Procura_ArvBin(raiz, procura)==0) printf("PALAVRA NAO ENCONTRADA!");
         printf("\n");
         libera_ArvBin(raiz);
         fclose(l);

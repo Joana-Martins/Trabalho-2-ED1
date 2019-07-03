@@ -90,7 +90,7 @@ void RotacaoRL(ArvBin *A) {
 	RotacaoLL(&(*A)->dir);
 	RotacaoRR(A);
 }
-
+/*
 int insere_ArvAVL(ArvBin *raiz, char *valor, FILE *l) {
 	if (*raiz == NULL) {
 		struct NO *novo;
@@ -103,11 +103,10 @@ int insere_ArvAVL(ArvBin *raiz, char *valor, FILE *l) {
 		novo -> esq = NULL;
 		novo -> dir = NULL;
 		//printf("%p\n", novo);
-		novo -> info -> palavra = (char*) malloc(47 * sizeof(char));
-		novo -> info -> posicoes
-				= (long int*) malloc(100000 * sizeof(long int));
+		novo -> info -> palavra = (char*) malloc(150 * sizeof(char));
+		novo -> info -> posicoes = (long int*) malloc(100000 * sizeof(long int));
 		strcpy(novo -> info -> palavra, valor);
-		printf("inserido = %s\n",novo -> info -> palavra );
+		//printf("inserido = %s\n",novo -> info -> palavra );
 		novo -> info -> indice = 0;
 		novo -> info -> posicoes[novo -> info -> indice] = ftell(l);
 		novo -> altura = 0;
@@ -147,10 +146,66 @@ int insere_ArvAVL(ArvBin *raiz, char *valor, FILE *l) {
 		return 0;
 	}
 }
+*/
+
+int insere_ArvAVL(ArvBin *raiz, char* palavra, FILE *l){
+    int res;
+    if(*raiz == NULL){//Arvore vazia ou no folha
+        struct NO *novo;
+        novo = (struct NO*)malloc(sizeof(struct NO));
+        if(novo == NULL)
+            return 0;
+
+        novo -> info = (Info*)malloc(sizeof(Info));
+		novo -> info -> palavra=malloc(150);
+		strcpy(novo->info->palavra,palavra);
+		novo -> info -> posicoes = (long int*) malloc(sizeof(long int));
+		novo -> info -> posicoes[novo -> info -> indice] = ftell(l);
+		novo -> info -> indice = 0;
+        novo -> altura = 0;
+        novo -> esq = NULL;
+        novo -> dir = NULL;
+        *raiz = novo;
+        return 1;
+    }
+
+    struct NO *atual = *raiz;
+    if(strcmp(palavra, (*raiz) -> info -> palavra) < 0){
+        if((res = insere_ArvAVL(&(atual->esq), palavra, l)) == 1){
+            if(fatorBalanceamento_NO(atual) >= 2){
+                if(strcmp(palavra, (*raiz) -> esq -> info -> palavra) < 0){
+                    RotacaoLL(raiz);
+                }else{
+                    RotacaoLR(raiz);
+                }
+            }
+        }
+    }else{
+        if(strcmp(palavra, (*raiz) -> info -> palavra) > 0){
+            if((res = insere_ArvAVL(&(atual->dir), palavra, l)) == 1){
+                if(fatorBalanceamento_NO(atual) >= 2){
+                    if(strcmp(palavra, (*raiz) -> dir -> info -> palavra) > 0){
+                        RotacaoRR(raiz);
+                    }else{
+                        RotacaoRL(raiz);
+                    }
+                }
+            }
+        }
+		else{
+			(*raiz) -> info -> indice++;
+			(*raiz) -> info -> posicoes[(*raiz) -> info -> indice] = ftell(l);
+			return 0;
+		}
+		atual->altura = maior(altura_NO(atual->esq),altura_NO(atual->dir)) + 1;
+	}
+	return res;
+}
+
 
 void Procura_ArvAVL(ArvBin *raiz, char *procura) {
 	int i;
-	printf("enderco raiz %p\n", *raiz);
+	//printf("enderco raiz %p\n", *raiz);
 	if (*raiz == NULL) {
 		printf("Erro na insercao de palavras");
 		return;
