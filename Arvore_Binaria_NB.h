@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "Padroniza_Palavra.h"
 
 typedef struct info{
   char *palavra;
@@ -20,11 +21,13 @@ struct NO{
 
 typedef struct NO* ArvBin;
 
+void padroniza_Palavra(char* palavra);
+
 ArvBin* cria_ArvBin();
 
 int insere_ArvBin(ArvBin* raiz, char *p, FILE *f);
 
-int Procura_ArvBin(ArvBin *raiz, char *procura);
+void Procura_ArvBin(ArvBin *raiz, char *procura);
 
 void libera_NO(struct NO* no);
 

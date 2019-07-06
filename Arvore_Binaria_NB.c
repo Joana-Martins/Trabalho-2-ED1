@@ -14,7 +14,7 @@ int insere_ArvBin(ArvBin* raiz, char *p, FILE *f){
     (*raiz) -> info = (Info*) malloc (sizeof(Info));
     (*raiz) -> info -> palavra = (char*)malloc((strlen(p)+1)*sizeof(char));
     strcpy((*raiz) -> info -> palavra, p);
-    (*raiz) -> info -> posicoes = malloc(100000 * sizeof(long int));
+    (*raiz) -> info -> posicoes = malloc(100000*sizeof(long int));
     (*raiz) -> info -> indice = 0;
   }
 
@@ -52,14 +52,15 @@ void libera_ArvBin(ArvBin *raiz){
   free(raiz);
 }
 
-int Procura_ArvBin(ArvBin *raiz, char *procura){
-  struct NO* atual = *raiz;
-  while(atual != NULL){
-    if(strcmp(procura, atual->info->palavra)==0) return 1;
-    else if(procura < atual->info->palavra) atual = atual->esq;
-    else if(procura > atual->info->palavra) atual = atual->dir;
-  }
-  return 0;
+void Procura_ArvBin(ArvBin *raiz, char *procura){
+  if((*raiz)==NULL) printf("\nPALAVRA NAO ENCONTRADA!\n");
+  else if(strcmp(procura, (*raiz)->info->palavra)==0){
+    for(int j = 0; j < (*raiz)->info->indice; j++){
+      printf("%ld ", (*raiz) -> info -> posicoes[j] - strlen(procura)+1);
+    }
+  } 
+  else if(strcmp(procura, (*raiz)->info->palavra)<0) Procura_ArvBin(&(*raiz)->esq, procura);
+  else if(strcmp(procura, (*raiz)->info->palavra)>0) Procura_ArvBin(&(*raiz)->dir, procura);
 }
 
 void consulta_ArvBin(char *procura, char **arquivos, int tam){
@@ -72,15 +73,11 @@ void consulta_ArvBin(char *procura, char **arquivos, int tam){
       if(!l) printf("%s ARQUIVO INEXISTENTE\n", arquivos[i]);
       else{
         while(fscanf(l, "%s", aux) != EOF){
+          padroniza_Palavra(aux);
           insere_ArvBin(raiz, aux, l);
         }
         printf("%s ", arquivos[i]);
-        if(Procura_ArvBin(raiz, procura)==1){
-          for(int i = 0; i < (*raiz)->info->indice; i++){
-            printf("%ld ", (*raiz) -> info -> posicoes[i] - strlen(procura)+1);
-          }
-        }
-        if(Procura_ArvBin(raiz, procura)==0) printf("PALAVRA NAO ENCONTRADA!");
+        Procura_ArvBin(raiz,procura);
         printf("\n");
         libera_ArvBin(raiz);
         fclose(l);
