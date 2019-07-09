@@ -1,11 +1,13 @@
 #include "Arvore_Binaria_NB.h"
 
+/* Aloca dinamincamente um ponteiro para a arvore binaria */
 ArvBin* cria_ArvBin(){
   ArvBin* raiz = (ArvBin*)malloc(sizeof(ArvBin));
   *raiz = NULL;
   return raiz;
 }
 
+/* Dada uma palavra e seu arquivo de origem, guarda a mesma e sua posicao */
 int insere_ArvBin(ArvBin* raiz, char *p, FILE *f){
   if(*raiz == NULL){
     *raiz = malloc(sizeof(struct NO));
@@ -31,6 +33,7 @@ int insere_ArvBin(ArvBin* raiz, char *p, FILE *f){
 return 0;
 }
 
+/* Desaloca um no da arvore, seus conteudos e seus ramos */
 void libera_NO(struct NO* no){
   if(no == NULL){
     return;
@@ -44,6 +47,7 @@ void libera_NO(struct NO* no){
   no = NULL;
 }
 
+/* Desaloca a arvore binaria */
 void libera_ArvBin(ArvBin *raiz){
   if(*raiz == NULL){
     return;
@@ -52,6 +56,7 @@ void libera_ArvBin(ArvBin *raiz){
   free(raiz);
 }
 
+/* Procura uma dada palavra dentro da arvore */
 void Procura_ArvBin(ArvBin *raiz, char *procura){
   if((*raiz)==NULL) printf("\nPALAVRA NAO ENCONTRADA!\n");
   else if(strcmp(procura, (*raiz)->info->palavra)==0){
@@ -63,6 +68,8 @@ void Procura_ArvBin(ArvBin *raiz, char *procura){
   else if(strcmp(procura, (*raiz)->info->palavra)>0) Procura_ArvBin(&(*raiz)->dir, procura);
 }
 
+/* FUNCAO PRINCIPAL */
+/* Insere as palavras dos arquivos dados como parametro em uma arvore e realiza a busca */
 void consulta_ArvBin(char *procura, char **arquivos, int tam){
     ArvBin *raiz = cria_ArvBin();
     FILE *l;

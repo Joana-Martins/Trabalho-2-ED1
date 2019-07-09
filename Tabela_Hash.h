@@ -1,64 +1,70 @@
+/*#ifndef HASH_H_
+#define HASH_H_
+#include<stdlib.h>
+#include<string.h>
+struct aluno{
+  int matricula;
+  char nome[30];
+  float n1, n2, n3;
+};
+struct hash{
+  int qtd, TABLE_SIZE;
+  struct aluno** itens;
+};
+typedef struct hash Hash;
+Hash* criaHash(int TABLE_SIZE);
+void liberaHash(Hash* ha);
+int chaveDivisao(int chave, int TABLE_SIZE);
+int chaveMultiplicacao(int chave, int TABLE_SIZE);
+int chaveDobra(int chave, int TABLE_SIZE);
+int valorString(char* str);
+int insereHash_SemColisao(Hash* ha, struct aluno al);
+int buscaHash_SemColisao(Hash* ha, int mat, struct aluno* al);
+int insereHash_EnderAberto(Hash* ha, struct aluno al);
+int buscaHash_EnderAberto(Hash* ha, int mat, struct aluno* al);
+#endif*/
+
 #ifndef HASH_H_
 #define HASH_H_
 
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/time.h>
 #include <string.h>
+#include "Lista_Encadeada.h"
 #define M 7
 #define N 20
 #define TAMALFABETO 256
 
-/* typedef unsigned int  TipoPesos[n]; */
 typedef char TipoChave[N];
-
 typedef unsigned TipoPesos[N][TAMALFABETO];
-
-typedef struct TipoItem {
-  char *palavra;
-  TipoChave Chave;
-} TipoItem;
-
 typedef unsigned int TipoIndice;
-
-typedef struct TipoCelula* TipoApontador;
-
-typedef struct TipoCelula {
-  TipoItem Item;
-  TipoApontador Prox;
-} TipoCelula;
-
-typedef struct TipoLista {
-  TipoCelula *Primeiro, *Ultimo;
-} TipoLista;
 
 typedef TipoLista TipoDicionario[M];
 
-void FLVazia(TipoLista *Lista);
+void FLVazia_Hash(TipoLista *Lista);
 
-int Vazia(TipoLista Lista);
+void Ins(char* x, TipoLista *Lista, FILE *f);
 
-void Ins(TipoItem x, TipoLista *Lista);
-
-void Ret(TipoApontador p, TipoLista *Lista, TipoItem *Item);
+//void Ret(TipoApontador p, TipoLista *Lista, TipoItem *Item);
 
 void GeraPesos(TipoPesos p);
 
-TipoIndice h(TipoChave Chave, TipoPesos p);
+TipoIndice h(char* Chave, TipoPesos p);
 
 void Inicializa(TipoDicionario T);
 
-TipoApontador Pesquisa(TipoChave Ch, TipoPesos p, TipoDicionario T);
+TipoApontador Pesquisa(char* Ch, TipoPesos p, TipoDicionario T);
 
-void Insere(TipoItem x, TipoPesos p, TipoDicionario T);
+void Insere_Hash(char* x, TipoPesos p, TipoDicionario T, FILE *f);
 
+void Retira_Hash(Item x, TipoPesos p, TipoDicionario T);
 
-void Retira(TipoItem x, TipoPesos p, TipoDicionario T);
-
-void Imp(TipoLista Lista);
+void Imp(TipoLista* Lista);
 
 void Imprime(TipoDicionario Tabela);
 
-
+void busca_Hash(char **arquivos, char *procurando, int tam);
 
 #endif

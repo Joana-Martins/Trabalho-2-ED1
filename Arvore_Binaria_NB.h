@@ -1,3 +1,5 @@
+/* Biblioteca para as funcoes de Arvore Binaria */
+
 #ifndef ARVORE_BINARIA_NB_H_
 #define ARVORE_BINARIA_NB_H_
 

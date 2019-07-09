@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "Padroniza_Palavra.h"
 
 typedef struct item{
   char *palavra;
@@ -25,18 +26,12 @@ TipoLista *FLVazia();
 
 int Vazia(TipoLista *Lista);
 
-void Insere(Item *x, TipoLista *Lista, FILE *f);
+void Insere(char *x, TipoLista *Lista, FILE *f);
 
-//void Retira(TipoLista *Lista, Produto *Item);
-
-void Procura(TipoLista *Lista, Item *x);
-
-//int Quantidade(TipoLista Lista);
-
-Item* criaPalavra(char *palavra);
+void Procura(TipoLista *Lista, char *x);
 
 void liberdade_lista(TipoLista *Lista);
 
-void lista_de_busca(char **arquivos, Item *procurando, int tam);
+void lista_de_busca(char **arquivos, char *procurando, int tam);
 
 #endif //LISTA_ENCADEADA_H_
