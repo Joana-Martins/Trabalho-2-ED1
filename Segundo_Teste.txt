@@ -1,0 +1,69 @@
+PRIMEIRO TESTE
+
+ARQUIVO: bible.txt
+
+i) PALAVRA ESPECIFICA 
+
+** PALAVRA EXISTENTE **
+Palavra usada: jesus
+
+1 - tempo gasto: 219584 ms
+2 - tempo gasto: 211868 ms
+3 - tempo gasto: 221352 ms
+4 - tempo gasto: 232139 ms
+5 - tempo gasto: 231272 ms
+6 - tempo gasto: 227153 ms
+7 - tempo gasto: 228575 ms
+8 - tempo gasto: 227501 ms
+9 - tempo gasto: 227489 ms
+10 - tempo gasto: 225770 ms
+
+Tempo medio: 225270.3
+
+** PALAVRA NAO EXISTENTE **
+Palavra usada: susej
+
+1 - tempo gasto: 254550 ms
+2 - tempo gasto: 233444 ms
+3 - tempo gasto: 237495 ms
+4 - tempo gasto: 230478 ms
+5 - tempo gasto: 232474 ms
+6 - tempo gasto: 
+7 - tempo gasto: 
+8 - tempo gasto: 
+9 - tempo gasto: 
+10 - tempo gasto: 
+
+Tempo medio: 
+
+ii) PALAVRAS ALEATORIAS
+
+1 - tempo gasto: 
+2 - tempo gasto: 
+3 - tempo gasto: 
+4 - tempo gasto: 
+5 - tempo gasto: 
+6 - tempo gasto: 
+7 - tempo gasto: 
+8 - tempo gasto: 
+9 - tempo gasto: 
+10 - tempo gasto: 
+
+Tempo medio: 
+
+iii) TODAS AS PALAVRAS
+
+1 - tempo gasto: 
+2 - tempo gasto: 
+3 - tempo gasto: 
+4 - tempo gasto: 
+5 - tempo gasto: 
+6 - tempo gasto: 
+7 - tempo gasto: 
+8 - tempo gasto: 
+9 - tempo gasto: 
+10 - tempo gasto: 
+
+Tempo medio:
+
+
