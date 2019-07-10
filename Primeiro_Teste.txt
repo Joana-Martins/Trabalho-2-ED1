@@ -1,0 +1,69 @@
+PRIMEIRO TESTE
+
+ARQUIVO: lorem.txt
+
+i) PALAVRA ESPECIFICA 
+
+** PALAVRA EXISTENTE **
+Palavra usada: lorem
+
+1 - tempo gasto: 219.083 ms
+2 - tempo gasto: 207.834 ms
+3 - tempo gasto: 218.038 ms
+4 - tempo gasto: 214.140 ms
+5 - tempo gasto: 211.669 ms
+6 - tempo gasto: 214.947 ms
+7 - tempo gasto: 211.617 ms
+8 - tempo gasto: 214.167 ms
+9 - tempo gasto: 216.547 ms
+10 - tempo gasto: 210.590 ms
+
+Tempo medio: 213.8629 ms
+
+** PALAVRA NAO EXISTENTE **
+Palavra usada: merol
+
+1 - tempo gasto: 208.247 ms
+2 - tempo gasto: 265.653 ms
+3 - tempo gasto: 210.698 ms
+4 - tempo gasto: 206.964 ms
+5 - tempo gasto: 206.854 ms
+6 - tempo gasto: 205.994 ms
+7 - tempo gasto: 208.275 ms
+8 - tempo gasto: 205.872 ms
+9 - tempo gasto: 206.924 ms
+10 - tempo gasto: 209.421 ms
+
+Tempo medio: 213.4902 ms
+
+ii) PALAVRAS ALEATORIAS
+
+1 - tempo gasto: 21510.8 ms
+2 - tempo gasto: 8807.72 ms
+3 - tempo gasto: 17830.4 ms
+4 - tempo gasto: 10648.7 ms
+5 - tempo gasto: 20571.8 ms
+6 - tempo gasto: 20783.7 ms
+7 - tempo gasto: 16468.6 ms
+8 - tempo gasto: 17985.2 ms
+9 - tempo gasto: 15304.3 ms
+10 - tempo gasto: 15468.5 ms
+
+Tempo medio: 16537.972 ms
+
+iii) TODAS AS PALAVRAS
+
+1 - tempo gasto: 136847 ms
+2 - tempo gasto: 131840 ms
+3 - tempo gasto: 131490 ms
+4 - tempo gasto: 132418 ms
+5 - tempo gasto: 135936 ms
+6 - tempo gasto: 138615 ms
+7 - tempo gasto: 139552 ms
+8 - tempo gasto: 139964 ms
+9 - tempo gasto: 131844 ms
+10 - tempo gasto: 135367 ms
+
+Tempo medio: 135387.3
+
+
