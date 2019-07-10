@@ -1,4 +1,3 @@
-#include "Lista_Encadeada.h"
 #include "Biblioteca_Leitura_Arquivos.h"
 #include "Arvore_Binaria_NB.h"
 #include "Tabela_Hash.h"
@@ -15,13 +14,13 @@ int main(int argc, char* argv[]){
   scanf(" %s", procurar);
   padroniza_Palavra(procurar);
   printf("Lista encadeada: \n");
-  lista_de_busca(arquivos, procurar, tam);
+  Busca_Lista(arquivos, procurar, tam);
   printf("Arvore Binária:\n");
   consulta_ArvBin(procurar, arquivos, tam);
   //printf("Arvore Balanceada:\n");
   //consulta_ArvAVL(procurar, arquivos, tam);
   printf("Tabela Hash:\n");
-  busca_Hash(arquivos, procurar, tam);
+  Busca_Hash(arquivos,procurar,tam);
   free(procurar);
   for(int i=0;i<tam;i++)free(arquivos[i]);
   free(arquivos);

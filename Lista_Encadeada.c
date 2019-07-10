@@ -1,91 +1,88 @@
 #include "Lista_Encadeada.h"
 
-TipoLista *FLVazia(){
-  TipoLista *Lista = malloc(sizeof(TipoLista));
+TipoLista* Inicializa_Lista(){
+  TipoLista *Lista = (TipoLista*)malloc(sizeof(TipoLista));
   Lista -> Primeiro = NULL;
   Lista -> Ultimo = Lista -> Primeiro;
   return Lista;
 }
 
-int Vazia(TipoLista *Lista){
-  return (Lista->Primeiro == Lista->Ultimo); //se vazia, retorna 1.
+int Lista_Vazia(TipoLista *Lista){
+  return (Lista -> Ultimo == Lista -> Primeiro);
 }
 
-void Insere(char *x, TipoLista *Lista, FILE *f){
-if(Lista -> Primeiro == NULL){
-  Lista -> Primeiro = (TipoApontador)malloc(sizeof(TipoCelula));
-  Lista -> Primeiro -> item = (Item*)malloc(sizeof(Item));
-  Lista -> Primeiro -> item -> palavra = (char*)malloc(strlen(x)+1 * sizeof(char));
-  strcpy(Lista -> Primeiro -> item -> palavra, x);
-  Lista -> Primeiro -> item -> posicao = ftell(f);
-  Lista -> Ultimo = Lista -> Primeiro;
-  Lista -> Primeiro -> Prox = NULL;
-  Lista -> Ultimo -> Prox = Lista -> Primeiro -> Prox;
-  return;
+void Insere_Lista(char *Palavra, TipoLista *Lista, FILE *Arquivo){
+  if(Lista -> Primeiro == NULL){
+    Lista -> Primeiro = (TipoApontador)malloc(sizeof(TipoCelula));
+    Lista -> Primeiro -> Item = (TipoItem*)malloc(sizeof(TipoItem));
+    Lista -> Primeiro -> Item -> Palavra = (char*)malloc(strlen(Palavra)+1 * sizeof(char));
+    strcpy(Lista -> Primeiro -> Item -> Palavra, Palavra);
+    Lista -> Primeiro -> Item -> Posicao = ftell(Arquivo);
+    Lista -> Ultimo = Lista -> Primeiro;
+    Lista -> Primeiro -> Proximo = NULL;
+    Lista -> Ultimo -> Proximo = Lista -> Primeiro -> Proximo;
   }
-
-  Lista -> Ultimo -> Prox = (TipoApontador)malloc(sizeof(TipoCelula));
-  Lista -> Ultimo = Lista -> Ultimo -> Prox;
-  Lista -> Ultimo -> item = (Item*)malloc(sizeof(Item));
-  Lista -> Ultimo -> item -> palavra = (char*)malloc(strlen(x)+1 * sizeof(char));
-  strcpy(Lista -> Ultimo -> item -> palavra, x);
-  Lista -> Ultimo -> item -> posicao = ftell(f);
-  Lista -> Ultimo -> Prox = NULL;
+  else{
+    Lista -> Ultimo -> Proximo = (TipoApontador)malloc(sizeof(TipoCelula));
+    Lista -> Ultimo = Lista -> Ultimo -> Proximo;
+    Lista -> Ultimo -> Item = (TipoItem*)malloc(sizeof(TipoItem));
+    Lista -> Ultimo -> Item -> Palavra = (char*)malloc(strlen(Palavra)+1 * sizeof(char));
+    strcpy(Lista -> Ultimo -> Item -> Palavra, Palavra);
+    Lista -> Ultimo -> Item -> Posicao = ftell(Arquivo);
+    Lista -> Ultimo -> Proximo = NULL;
+  }
 }
 
-void Procura(TipoLista *Lista, char *x){
+void Procura_Lista(char* Palavra, TipoLista *Lista){
   TipoApontador aux;
   int contador = 0;
   aux = Lista -> Primeiro;
   while(aux != NULL){
-    if(strcmp(aux -> item -> palavra, x) == 0){
-      printf("%ld ", aux -> item -> posicao - strlen(x) + 1);
+    if(strcmp(aux -> Item -> Palavra, Palavra) == 0){
+      printf("%ld ", aux -> Item -> Posicao - strlen(Palavra) + 1);
       contador++;
     }
-    aux = aux -> Prox;
+    aux = aux -> Proximo;
   }
   if(contador == 0) printf("PALAVRA NAO ENCONTRADA!\n");
 }
 
-void liberdade_lista(TipoLista *Lista){
-  TipoApontador aux = Lista->Primeiro;
+void Desaloca_Lista(TipoLista *Lista){
+  TipoApontador aux = Lista -> Primeiro;
   TipoApontador aux2;
   while(aux != NULL){
     aux2 = aux;
-    aux = aux->Prox;
-    free(aux2->item->palavra);
-    free(aux2 -> item);
+    aux = aux -> Proximo;
+    free(aux2 -> Item -> Palavra);
+    free(aux2 -> Item);
     free(aux2);
   }
   free(Lista);
 }
 
-void lista_de_busca(char **arquivos, char *procurando, int tam){
-  TipoLista *lista;
-  lista = FLVazia();
+void Busca_Lista(char **Arquivos, char *Procura, int qtdArquivos){
+  TipoLista *Lista = Inicializa_Lista();
   char *aux=malloc(47*sizeof(char));
-  char *palavra;
-  int i;
-  FILE *l;
-  for(i = 0; i < tam; i++){
-    l = fopen(arquivos[i], "r");
-    if(!l) printf("%s ARQUIVO INEXISTENTE\n", arquivos[i]);
+  char *Palavra;
+  FILE *Arquivo;
+  for(int i = 0; i < qtdArquivos; i++){
+    Arquivo = fopen(Arquivos[i], "r");
+    if(!Arquivo) printf("%s ARQUIVO INEXISTENTE\n", Arquivos[i]);
     else{
-      while(fscanf(l, "%s", aux) != EOF){
+      while(fscanf(Arquivo, "%s", aux) != EOF){
         padroniza_Palavra(aux);
-        palavra=malloc(strlen(aux)+1);
-        strcpy(palavra,aux);
-        Insere(palavra, lista, l);
-        free(palavra);
+        Palavra=malloc(strlen(aux)+1);
+        strcpy(Palavra,aux);
+        Insere_Lista(Palavra, Lista, Arquivo);
+        free(Palavra);
       }
-      printf("%s ", arquivos[i]);
-      Procura(lista, procurando);
-      printf("\n");
-      liberdade_lista(lista);
-      fclose(l);
-      lista = FLVazia();
+      printf("%s ", Arquivos[i]);
+      Procura_Lista(Procura, Lista);
+      Desaloca_Lista(Lista);
+      fclose(Arquivo);
+      Lista = Inicializa_Lista();
     }
   }
-  liberdade_lista(lista);
+  Desaloca_Lista(Lista);
   free(aux);
 }

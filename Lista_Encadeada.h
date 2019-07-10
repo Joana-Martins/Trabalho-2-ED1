@@ -6,32 +6,31 @@
 #include <string.h>
 #include "Padroniza_Palavra.h"
 
-typedef struct item{
-  char *palavra;
-  long int posicao;
-}Item;
+typedef struct{
+  char *Palavra;
+  long int Posicao;
+}TipoItem;
 
-typedef struct Celula* TipoApontador;
-
-typedef struct Celula{
-  Item *item;
-  TipoApontador Prox;
+typedef struct TipoCelula* TipoApontador;
+typedef struct TipoCelula{
+  TipoItem *Item;
+  TipoApontador Proximo;
 }TipoCelula;
 
 typedef struct{
   TipoApontador Primeiro, Ultimo;
 }TipoLista;
 
-TipoLista *FLVazia();
+TipoLista* Inicializa_Lista();
 
-int Vazia(TipoLista *Lista);
+int Lista_Vazia(TipoLista *Lista);
 
-void Insere(char *x, TipoLista *Lista, FILE *f);
+void Insere_Lista(char *Palavra, TipoLista *Lista, FILE *Arquivo);
 
-void Procura(TipoLista *Lista, char *x);
+void Procura_Lista(char* Palavra, TipoLista *Lista);
 
-void liberdade_lista(TipoLista *Lista);
+void Desaloca_Lista(TipoLista *Lista);
 
-void lista_de_busca(char **arquivos, char *procurando, int tam);
+void Busca_Lista(char **Arquivos, char *Procura, int qtdArquivos);
 
 #endif //LISTA_ENCADEADA_H_
