@@ -1,0 +1,451 @@
+%% MODELO DE LATEX PARA TRABALHOS ACADÊMICOS
+%% INSTRUÇÕES GERAIS:
+%%    1. TODO O TEXTO NA FRENTE DO SIMBOLO '%' É COMENTÁRIO, ISTO É, ELE NÃO FAZ DIFERENÇA NO RESULTADO FINAL 
+%%    2. NESTE MODELO, VOCÊS SÓ PRECISAM EDITAR DAS LINHAS 114 A 132 (INFORMAÇÕES DE CAPA) E DAS LINHAS 188 EM DIANTE (CORPO DO TRABALHO). O RESTO SÃO CONFIGURAÇÕES DE FORMATAÇÃO QUE PROVAVELMENTE NÃO SERÁ PRECISO MODIFICAR.
+%%    3. MAIS INSTRUÇÕES DETALHADAS PODERÃO SER ENCONTRADAS NA PÁGINA profhelioh.wordpress.com. DÚVIDAS: heliohenrique@ufpr.br OU heliohenrique3@gmail.com
+
+% INFORMAÇÕES DA FONTE:
+%% abtex2-modelo-relatorio-tecnico.tex, v-1.7.1 laurocesar
+%% Copyright 2012-2013 by abnTeX2 group at http://abntex2.googlecode.com/ 
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is the abnTeX2 team, led
+%% by Lauro César Araujo. Further information are available on 
+%% http://abntex2.googlecode.com/
+%%
+%% This work consists of the files abntex2-modelo-relatorio-tecnico.tex,
+%% abntex2-modelo-include-comandos and abntex2-modelo-references.bib
+%%
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% abnTeX2: Modelo de Relatório Técnico/Acadêmico em conformidade com 
+% ABNT NBR 10719:2011 Informação e documentação - Relatório técnico e/ou
+% científico - Apresentação
+% ------------------------------------------------------------------------ 
+% ------------------------------------------------------------------------
+
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	% openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+    oneside,			% para impressão somente frente. Oposto a twoside (frente e verso)
+	a4paper,			% tamanho do papel. 
+	% -- opções da classe abntex2 --
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	french,				% idioma adicional para hifenização
+	spanish,			% idioma adicional para hifenização
+	brazil,				% o último idioma é o principal do documento
+	]{abntex2}
+
+
+% ---
+% PACOTES
+% ---
+
+% ---
+% Pacotes fundamentais 
+% ---
+\usepackage{cmap}				% Mapear caracteres especiais no PDF
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+% ---
+
+% ---
+% Pacotes adicionais, usados no anexo do modelo de folha de identificação
+% ---
+\usepackage{multicol}
+\usepackage{multirow}
+% ---
+	
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+% --- 
+% CONFIGURAÇÕES DE PACOTES
+% --- 
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{Relatório Trabalho de Algoritmos Numéricos I}
+\author{João Felipe Gobeti Calenzani
+{\footnotesize\ttfamily}}
+
+\local{Vitória, Brasil}
+\data{13 de Maio de 2019}
+\instituicao{%
+  Universidade Federal do Espírito Santo
+  \par
+  Algoritmos Numéricos I
+  \par
+  Centro Tecnológico}
+\tipotrabalho{Relatório técnico}
+% O preambulo deve conter o tipo do trabalho, o objetivo, 
+% o nome da instituição e a área de concentração 
+\preambulo{Relatório explicativo, na qual relata as atividades desenvolvidas para resolução de Problemas de Valores Iniciais (PVIs) em Equações Diferenciais Ordinárias (EDOs) utilizando o software octave}
+% ---
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title}, 
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{relatório técnico}, 
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% --- 
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
+
+% ---
+% Capa
+% ---
+\imprimircapa
+% ---
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto*
+% ---
+
+% ---
+
+% ---
+% RESUMO
+% ---
+
+% resumo na língua vernácula (obrigatório)
+%\begin{resumo} %% AQUI COMEÇA A PÁGINA DE RESUMO
+% Segundo a \citeonline{NBR6028:2003}, o resumo deve ressaltar o
+% objetivo, o método, os resultados e as conclusões do documento. A ordem e a extensão
+% destes itens dependem do tipo de resumo (informativo ou indicativo) e do
+% tratamento que cada item recebe no documento original. O resumo deve ser
+% precedido da referência do documento, com exceção do resumo inserido no
+% próprio documento. (\ldots) As palavras-chave devem figurar logo abaixo do
+% resumo, antecedidas da expressão Palavras-chave:, separadas entre si por
+% ponto e finalizadas também por ponto. Bla bla bla bla bla \cite{fulano} %% EXEMPLO DE CITAÇÃO (vá em %abntex2-modelo-references.bib)
+
+ %\vspace{\onelineskip}
+    
+ %\noindent
+ %\textbf{Palavras-chaves}: latex. abntex. editoração de texto.
+%\end{resumo} %AQUI TERMINA A PÁGINA DE RESUMO
+% ---
+
+% ---
+% inserir lista de ilustrações
+% ---
+
+\listoffigures* %% o * indica que não será incluso no sumário
+\cleardoublepage
+% ---
+
+
+
+% ---
+% inserir lista de abreviaturas e siglas
+% ---
+
+\begin{siglas}
+  \item[PVI] Problema de Valor Inicial
+  \item[EDO] Equação Diferencial Ordinária 
+\end{siglas}
+
+% ---
+
+
+% ---
+
+% ---
+% inserir o sumario
+% ---
+
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% ---
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS  (necessário para incluir número nas páginas)
+% ----------------------------------------------------------
+\textual
+
+
+% ----------------------------------------------------------
+% Introdução
+% ----------------------------------------------------------
+\chapter{Introdução} %% NOVO CAPÍTULO (REPARE QUE ELE AUTOMATICAMENTE JÁ COLOCA O NÚMERO DO CAPÍTULO E JÁ ADICIONA NO SUMÁRIO)
+
+O documento em questão trata primordialmente dos resultados obtidos pelo script desenvolvido para a plataforma Octave. Nele, estão expressos todos os resultados obtidos na resolução de PVIs em EDOs (especificados no enunciado do trabalho), bem como a explanação da forma como tais resultados foram obtidos.
+
+% ---
+% ----------------------------------------------------------
+% Objetivos
+% ----------------------------------------------------------
+\chapter{Objetivos} %% NOVO CAPÍTULO (REPARE QUE ELE AUTOMATICAMENTE JÁ COLOCA O NÚMERO DO CAPÍTULO E JÁ ADICIONA NO SUMÁRIO)
+
+O Objetivo do estudo, é concretizar o aprendizado de resolução de PVIs em EDOs através da prática, utilizando um software de auxílio para melhor visualização dos resultados obtidos na utilização de diferentes métodos de resolução de EDOs.
+% ---
+
+\chapter{Metodologia}
+
+Para a resolução dos PVIs indicados no item 2 do pdf do enunciado do trabalho, foram utilizados os seguintes métodos de resolução de EDOs (além da solução analítica):
+
+\begin{itemize}
+   \item Euler 
+   \item Euler Melhorado
+   \item Euler Modificado
+   \item Genérico de 2\textordfeminine\ ordem com $\alpha = \frac{1}{4}$
+   \item Dormand-Prince com passo fixo
+   \item Dormand-Prince com passo adaptativo
+\end{itemize}
+
+Para cada PVI apresentado, foi gerado um gráfico com a curva da solução analítica e com as curvas de cada método acima citado, além de duas tabelas: uma com os resultados encontrados para cada x, e outra com os erros em relação à solução exata para cada x. Os Xs usados respeitam o passo h definido no enunciado.
+
+Para o Problema Prático do reservatório de líquidos, foi gerado uma função analítica de resolução da EDO, e calculado seus valores para diferentes parâmetros. Para cada conjunto de parâmetros, um gráfico com a curva de concentração durante o tempo e a reta de concentração inserida no reservatório foi plotado.
+
+
+\chapter{Resultados e Avaliação}
+
+Como resultado dos procedimentos desenvolvidos no projeto, temos:
+
+\begin{itemize}
+	\item PVI 1: \begin{equation} {\frac{dy}{dx} = y , y(x0) = y0}, x0 = 0, y0 = 1 \end{equation}
+	\begin{itemize}
+	\item Solução analítica: \begin{equation} y(x) = y0 \cdot e^{x} \cdot e^{-x0} \end{equation}
+	\item Tabela de Valores:
+	\begin{figure}[!htb]
+     \centering
+     \includegraphics[width=15cm, height=6.5cm]{figuras/Valorespvi1.png}
+     \caption{Tabela de Valores PVI 1}
+     \label{Tabela de Valores PVI 1}
+\end{figure}
+	\item Tabela de Erros:
+	\begin{figure}[!htb]
+
+     \centering
+     \includegraphics[width=15cm, height=6.5cm]{figuras/errospvi1.png}
+     \caption{Tabela de Erros PVI 1}
+     \label{Tabela de Erros PVI 1}
+\end{figure}
+\item Gráfico:
+	\begin{figure}[!htb]
+     \centering
+     \includegraphics[width=15cm]{figuras/pvi1.png}
+     \caption{Gráfico PVI 2}
+     \label{Gráfico PVI 1}
+\end{figure}
+	\end{itemize}
+	
+\newpage
+	
+	\item PVI 2: \begin{equation} {\frac{dy}{dx} = y \cdot ln(x+1) , y(x0) = y0}, x0 = 0, y0 = 1 \end{equation}
+	\begin{itemize}
+	\item Solução analítica: \begin{equation} y(x) = \frac{y0 \cdot (x+1) \cdot e^{x \cdot log(x+1) -1} \cdot e^{-x0 \cdot log(x+1) -1}}{x0 + 1} \end{equation}
+	\item Tabela de Valores:
+	\begin{figure}[!htb]
+     \centering
+     \includegraphics[width=15cm, height=6.5cm]{figuras/Valorespvi2.png}
+     \caption{Tabela de Valores PVI 2}
+     \label{Tabela de Valores PVI 2}
+\end{figure}
+	\item Tabela de Erros:
+	\begin{figure}[!htb]
+
+     \centering
+     \includegraphics[width=15cm, height=6.5cm]{figuras/errospvi2.png}
+     \caption{Tabela de Erros PVI 2}
+     \label{Tabela de Erros PVI 2}
+\end{figure}
+\newpage
+\item Gráfico:
+	\begin{figure}[!htb]
+     \centering
+     \includegraphics[width=15cm]{figuras/pvi2.png}
+     \caption{Gráfico PVI 2}
+     \label{Gráfico PVI 2}
+\end{figure}
+\end{itemize}
+
+\newpage
+
+\item PVI 3: \begin{equation} {\frac{dy}{dx} = y \cdot sen(x) , y(x0) = y0}, x0 = 0, y0 = 1 \end{equation}
+	\begin{itemize}
+	\item Solução analítica: \begin{equation} y(x) = y0 \cdot e^{-cos(x)} \cdot e^{cos(x0)} \end{equation}
+	\item Tabela de Valores:
+	\begin{figure}[!htb]
+     \centering
+     \includegraphics[width=15cm, height=6.5cm]{figuras/Valorespvi3.png}
+     \caption{Tabela de Valores PVI 3}
+     \label{Tabela de Valores PVI 3}
+\end{figure}
+	\item Tabela de Erros:
+	\begin{figure}[!htb]
+
+     \centering
+     \includegraphics[width=15cm, height=6.5cm]{figuras/errospvi3.png}
+     \caption{Tabela de Erros PVI 3}
+     \label{Tabela de Erros PVI 3}
+\end{figure}
+\newpage
+\item Gráfico:
+	\begin{figure}[!htb]
+     \centering
+     \includegraphics[width=15cm]{figuras/pvi3.png}
+     \caption{Gráfico PVI 3}
+     \label{Gráfico PVI 3}
+\end{figure}
+	\end{itemize}
+	\newpage
+	\item Problema Prático Reservatório de Líquidos
+	\begin{itemize}
+	\item Solução analítica: \begin{equation} c(t) = cin + (c0 - cin) \cdot \frac{e^{\frac{Qin}{Qin - Qout} \cdot ln (V0 + t0 \cdot (Qin - Qout))}}{ (V0 + t \cdot (Qin - Qout))} \end{equation}
+	\item Gráfico com Primeiro Grupo de Parametros:
+	\begin{figure}[!htb]
+     \centering
+     \includegraphics[width=15cm, height=6.5cm]{figuras/rl1.png}
+     \caption{Gráfico RL 1}
+     \label{Gráfico RL 1}
+\end{figure}
+	\item Gráfico com Segundo Grupo de Parametros:
+	\begin{figure}[!htb]
+     \centering
+     \includegraphics[width=15cm, height=6.5cm]{figuras/rl2.png}
+     \caption{Gráfico RL 2}
+     \label{Gráfico RL 2}
+\end{figure}
+\newpage
+\item Gráfico com Terceiro Grupo de Parametros:
+	\begin{figure}[!htb]
+     \centering
+     \includegraphics[width=15cm, height=6.5cm]{figuras/rl3.png}
+     \caption{Gráfico RL 3}
+     \label{Gráfico RL 3}
+\end{figure}
+	\end{itemize}
+		
+	\end{itemize}	
+	
+
+
+% ---
+% Conclusão
+% ---
+\chapter*[Conclusão]{Conclusão}
+\addcontentsline{toc}{chapter}{Conclusão}
+
+É imprescindível, para um aluno de computação, o entendimento de como Equações Diferenciais Ordinárias podem ser resolvidas facilmente com o auxília de um software computacional. Além disso, com a experiência adquirida no decorrer do estudo, problemas posteriores encontrados durante a vida acadêmica serão mais facilmente resolvidos.
+
+A partir do estudo, uma certeza maior ressoa: a de que o conhecimento gera sede por conhecimento, e que esse estudo é apenas o início de uma longa jornada no ramo computacional.
+
+
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+
+
+
+\bibliography{Biblioteca.bib}
+
+
+ %% REFERENCIA AO ARQUIVO abntex2-modelo-references.bib
+
+
+
+\end{document}

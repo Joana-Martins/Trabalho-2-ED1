@@ -1,0 +1,505 @@
+%% MODELO DE LATEX PARA TRABALHOS ACADÊMICOS
+%% INSTRUÇÕES GERAIS:
+%%    1. TODO O TEXTO NA FRENTE DO SIMBOLO '%' É COMENTÁRIO, ISTO É, ELE NÃO FAZ DIFERENÇA NO RESULTADO FINAL
+%%    2. NESTE MODELO, VOCÊS SÓ PRECISAM EDITAR DAS LINHAS 114 A 132 (INFORMAÇÕES DE CAPA) E DAS LINHAS 188 EM DIANTE (CORPO DO TRABALHO). O RESTO SÃO CONFIGURAÇÕES DE FORMATAÇÃO QUE PROVAVELMENTE NÃO SERÁ PRECISO MODIFICAR.
+%%    3. MAIS INSTRUÇÕES DETALHADAS PODERÃO SER ENCONTRADAS NA PÁGINA profhelioh.wordpress.com. DÚVIDAS: heliohenrique@ufpr.br OU heliohenrique3@gmail.com
+
+% INFORMAÇÕES DA FONTE:
+%% abtex2-modelo-relatorio-tecnico.tex, v-1.7.1 laurocesar
+%% Copyright 2012-2013 by abnTeX2 group at http://abntex2.googlecode.com/
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%%
+%% This work has the LPPL maintenance status `maintained'.
+%%
+%% The Current Maintainer of this work is the abnTeX2 team, led
+%% by Lauro César Araujo. Further information are available on
+%% http://abntex2.googlecode.com/
+%%
+%% This work consists of the files abntex2-modelo-relatorio-tecnico.tex,
+%% abntex2-modelo-include-comandos and abntex2-modelo-references.bib
+%%
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+% abnTeX2: Modelo de Relatório Técnico/Acadêmico em conformidade com
+% ABNT NBR 10719:2011 Informação e documentação - Relatório técnico e/ou
+% científico - Apresentação
+% ------------------------------------------------------------------------
+% ------------------------------------------------------------------------
+
+\documentclass[
+	% -- opções da classe memoir --
+	12pt,				% tamanho da fonte
+	% openright,			% capítulos começam em pág ímpar (insere página vazia caso preciso)
+    oneside,			% para impressão somente frente. Oposto a twoside (frente e verso)
+	a4paper,			% tamanho do papel.
+	% -- opções da classe abntex2 --
+	%chapter=TITLE,		% títulos de capítulos convertidos em letras maiúsculas
+	%section=TITLE,		% títulos de seções convertidos em letras maiúsculas
+	%subsection=TITLE,	% títulos de subseções convertidos em letras maiúsculas
+	%subsubsection=TITLE,% títulos de subsubseções convertidos em letras maiúsculas
+	% -- opções do pacote babel --
+	english,			% idioma adicional para hifenização
+	french,				% idioma adicional para hifenização
+	spanish,			% idioma adicional para hifenização
+	brazil,				% o último idioma é o principal do documento
+	]{abntex2}
+
+
+% ---
+% PACOTES
+% ---
+\usepackage{listings}
+\lstset{
+  language=C,
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  stringstyle=\color{green},
+  commentstyle=\color{red},
+  extendedchars=true,
+  showspaces=false,
+  showstringspaces=false,
+  numbers=left,
+  numberstyle=\tiny,
+  breaklines=true,
+  backgroundcolor=\color{white},
+  breakautoindent=true,
+  captionpos=b,
+  xleftmargin=0pt,
+}
+% ---
+% Pacotes fundamentais
+% ---
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{cmap}				% Mapear caracteres especiais no PDF
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento (conversão automática dos acentos)
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{graphicx}			% Inclusão de gráficos
+% ---
+
+% ---
+% Pacotes adicionais, usados no anexo do modelo de folha de identificação
+% ---
+\usepackage{multicol}
+\usepackage{multirow}
+% ---
+
+% ---
+% Pacotes adicionais, usados apenas no âmbito do Modelo Canônico do abnteX2
+% ---
+\usepackage{lipsum}				% para geração de dummy text
+% ---
+
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian,hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+% ---
+% CONFIGURAÇÕES DE PACOTES
+% ---
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\titulo{Relatório Trabalho de Estrutura de Dados I}
+\author{Joana Martins e Juliane Ferreira
+{\footnotesize\ttfamily}}
+
+\local{Vitória, Brasil}
+\data{10 de Julho de 2019}
+\instituicao{%
+  Universidade Federal do Espírito Santo
+  \par
+  Estrutura de Dados 1
+  \par
+  Centro Tecnológico}
+\tipotrabalho{Relatório técnico}
+% O preambulo deve conter o tipo do trabalho, o objetivo,
+% o nome da instituição e a área de concentração
+\preambulo{Relatório explicativo sobre a iplementação de um indexador de arquivos utilizando-se de várias estreuturas de dados}
+% ---
+
+% ---
+% Configurações de aparência do PDF final
+
+% alterando o aspecto da cor azul
+\definecolor{blue}{RGB}{41,5,195}
+
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title},
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{relatório técnico},
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+% ---
+
+% ---
+% Espaçamentos entre linhas e parágrafos
+% ---
+
+% O tamanho do parágrafo é dado por:
+\setlength{\parindent}{1.3cm}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+
+% Retira espaço extra obsoleto entre as frases.
+\frenchspacing
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+% \pretextual
+
+% ---
+% Capa
+% ---
+\imprimircapa
+% ---
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\imprimirfolhaderosto*
+% ---
+
+% ---
+
+% ---
+% RESUMO
+% ---
+
+% resumo na língua vernácula (obrigatório)
+%\begin{resumo} %% AQUI COMEÇA A PÁGINA DE RESUMO
+% Segundo a \citeonline{NBR6028:2003}, o resumo deve ressaltar o
+% objetivo, o método, os resultados e as conclusões do documento. A ordem e a extensão
+% destes itens dependem do tipo de resumo (informativo ou indicativo) e do
+% tratamento que cada item recebe no documento original. O resumo deve ser
+% precedido da referência do documento, com exceção do resumo inserido no
+% próprio documento. (\ldots) As palavras-chave devem figurar logo abaixo do
+% resumo, antecedidas da expressão Palavras-chave:, separadas entre si por
+% ponto e finalizadas também por ponto. Bla bla bla bla bla \cite{fulano} %% EXEMPLO DE CITAÇÃO (vá em %abntex2-modelo-references.bib)
+
+ %\vspace{\onelineskip}
+
+ %\noindent
+ %\textbf{Palavras-chaves}: latex. abntex. editoração de texto.
+%\end{resumo} %AQUI TERMINA A PÁGINA DE RESUMO
+% ---
+
+% ---
+% inserir lista de ilustrações
+% ---
+
+% ---
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+% inserir o sumario
+% ---
+
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% ---
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS  (necessário para incluir número nas páginas)
+% ----------------------------------------------------------
+\textual
+
+
+% ----------------------------------------------------------
+% Introdução
+% ----------------------------------------------------------
+\chapter{Introdução} %% NOVO CAPÍTULO (REPARE QUE ELE AUTOMATICAMENTE JÁ COLOCA O NÚMERO DO CAPÍTULO E JÁ ADICIONA NO SUMÁRIO)
+
+O documento em questão trata primordialmente dos resultados obtidos pela implementação de diversas estruturas de dados para encontrar posições em que uma palavra se encontra em um arquivo bem como a explanação da forma como tais resultados foram obtidos. De forma que, imprima na tela essas posições.
+
+As estruturas implementadas são Lista Encadeada, Árvore Binária, Árvore AVL, Árvore TRIES e Tabela Hash.
+% ---
+% ----------------------------------------------------------
+% Objetivos
+% ----------------------------------------------------------
+\chapter{Objetivos} %% NOVO CAPÍTULO (REPARE QUE ELE AUTOMATICAMENTE JÁ COLOCA O NÚMERO DO CAPÍTULO E JÁ ADICIONA NO SUMÁRIO)
+
+O Objetivo do estudo, é concretizar o aprendizado das estruturas de dados estudadas durante a matéria e assim entender os seus funcionamentos individuais além de decidir quais são as melhores estruturas para a resolução do problema apresentado pelo trabalho.
+
+
+% ---
+
+\chapter{Compilação e Execução}
+
+    Esse trabalho possui inúmeras bibliotecas com fins específicos, por isso a xcompilação por código no terminal ficaria muito extensa. Por tanto, existe o Makefile na pasta com os arquivos de código de forma que agilize esse processo, sendo necessário apenas escrever "make" no terminal que o programa é compilado.
+
+    Assim que a compilação mfor efetiva, é necessário executar o programa para ver o seu funcionamento.
+
+    Para isso basta escrever no terminal "./index" e em frente escrever os nomes dos .txt quais o usuário quer procurar as palavras.
+
+    Aparacerá, por fim, um menu para seguir para o próximo passo.
+
+
+\chapter{Menu e geração de palavras}
+
+O menu é a primeira coisa que o programa imprime na tela durante a execução. Assim que aparece, surgem três opções: digitar uma palavra a ser procurada, procurar palavras geradas aleatoriamente, ou procurar todas as palavras do arquivo.
+
+Para isso foram utilizados as bibliotecas menu.h, GeradorPalavras.h e ProcuraEstruturas.h.
+
+\begin{itemize}
+   \item Usuário digita a palavra: Isso é, quando o usuário digita 1 no menu. Assim, o programa pede para ser digitado uma palavra, que é escaneada e então jogada na função da biblioteca de ProcuraEstruturas.h, que apenas recebe os arquivos, a palavra a ser procurada e quantos arquivos devem ser usados, jogando essas informações nas funções que pesquisam em cada uma das estruturas implementadas.
+
+   \item Todas as palavras do arquivo: Ao selecionar a opção 3 do menu. Nisso, é chamada a função "palavrastodas" do GeradorPalavras.h que irá ler os arquivos e assim armazenar todas as palavras encontradas em uma matriz. De forma que, na hora de chamar a função da ProcuraEstruturas.h, o programa utiliza-se de um loop para colocar todas as palavras do arquivo como entrada e, assim sendo, procurar todas elas nas estruturas.
+
+   \item Palavras geradas aleatoriamente: Nesse caso, a função "palavrasaleatorias" da GeradorPalavras.h é utilizada. Esta função utiliza a matriz de todas as palavras do arquivo e assim, usando a função rand(), pega índices aleatórios dessa para criar uma matriz com 30 palavras dentre todas do arquivo. Significando que ao utilizar um for e jogar dentro da função de ProcuraEstruturas.h, o programa irá procurar tais palavras nas estruturas.
+
+\end{itemize}
+
+\chapter{Estruturas(structs)}
+    Para pesquisar palavras, era necessário um tipo de struct que facilite todo esse processo. Por isso, pensamos em criar  a estrutura abaixo.
+
+\begin{lstlisting}
+typedef struct info{
+  char *palavra;
+  int indice;
+  long int *posicoes;
+}Info;
+ } \end{lstlisting}
+
+ Esse tipo de estrutura utilizado para todas as estruturas de dados, exceto Árvore TRIES, é eficiente por armazenar todas as informações necessárias sobre uma palavra. Sendo possível acessá-la de forma mais rápida. Por isso, decidimos utilizá-la.
+
+ Já na árvore TRIES, a estrutura é a seguinte:
+
+ \begin{lstlisting}
+typedef struct posicao{
+    int indice;
+    long int *posicoes;
+}Posicao;
+ } \end{lstlisting}
+
+ Essa estrutura foi implementada assim por causa da funcionalida da estrutura TRIES, que armazena as palavras por caracteres em nós. Por isso, era necessário colocar as posições no final de uma palavra e não em cada nó como nas outras estruturas.
+
+
+\chapter{Estruturas Implementadas}
+
+Nessa parte, vamos comentar sobre a implementação de cada uma das estrutura.
+
+\section{Lista Encadeada}
+
+Uma lista encadeada é um tipo de estrutura que consiste em várias Celulas que apontam para a próxima Celula, de forma que faça várias estruturas (que contém a informação necessária) apontando para outra.
+
+Nisso, a estrutura fica:
+
+ \begin{lstlisting}
+typedef struct TipoCelula* TipoApontador;
+typedef struct TipoCelula{
+  TipoItem *Item;
+  TipoApontador Proximo;
+}TipoCelula;
+
+typedef struct{
+  TipoApontador Primeiro, Ultimo;
+}TipoLista;
+ } \end{lstlisting}
+
+A lista é conhecida por ser a menos eficiente, pois cada vez que insere tem que realizar procuras.
+
+\section{Árvore Binária}
+Árvore Binária é uma estrutura em que existe um nó, que por sua vez aponta para dois outros, sendo o nó da esquerda menor e o da direita maior. Dessa forma a busca fica mais eficiente por ter que percorrer menos informações antes de achar o que procura.
+
+ \begin{lstlisting}
+struct NO{
+  Info *info;
+  int altura;
+  struct NO *esq;
+  struct NO *dir;
+};
+typedef struct NO* ArvBin;
+ } \end{lstlisting}
+
+Sendo asssim, mais efetiva do que uma lista, por exemplo.
+
+
+\section{Árvore AVL}
+
+Uma árvore AVL usa as mesmas estruturas que a Árvore Binária, no entanto a diferença é que ela deverá ser balanceada através de funções de rotação, de forma que as diferenças de altura não passem do valor de balenceamento definidos.
+
+
+\section{Árvore TRIES}
+ Uma árvore TRIES é na qual existem vários filhos nos nós da árvore que correspondem a vários caracteres utilizados nas palavras inseridas. Dessa forma, no final da palavra vai ter um nó que contém todas as informações necessárias, sendo assim, tecnicamente é melhor para grandes textos, buscando de forma eficiente.
+
+
+  \begin{lstlisting}
+typedef struct trie{
+  struct trie*filho[127];
+  Posicao p;
+  bool flag;
+}ArvTRIE;
+ } \end{lstlisting}
+
+
+\section{Tabela Hash}
+
+\chapter {Testes de eficiência}
+Aqui presentes tabelas de comparações de tempo.
+
+\subsection{Arquivo de 4KB}
+
+Na tabela abaixo, mostramos a procura de uma palavra em um arquivo pequeno, sendo a palavra existente.
+
+\begin{table}[!h]
+    \centering
+    \begin{minipage}{0.7\hsize}
+    \caption{Procura de uma palavra 4KB}
+\begin{tabular}{lcc}
+\rowcolor[HTML]{FFCCC9}
+Estrutura      & \multicolumn{1}{l}{\cellcolor[HTML]{FFCCC9}Tempo Carregamento} & \multicolumn{1}{l}{\cellcolor[HTML]{FFCCC9}Tempo de Busca} \\
+\rowcolor[HTML]{C0C0C0}
+Lista Encadeada & 0,1ms                                                          & 1,637 ms                                                   \\
+\rowcolor[HTML]{FFCCC9}
+Árvore Binária  & 2ms                                                            & 1,9ms                                                      \\
+\rowcolor[HTML]{C0C0C0}
+Árvore AVL      & 2ms                                                            & 1,5ms                                                      \\
+\rowcolor[HTML]{FFCCC9}
+Árvore TRIE     & 0,1ms                                                          & 5,596ms
+\end{tabular}
+\end{minipage}
+\end{table}
+
+O que se pode concluir pela tabela é que em arquivos pequenos, a busca em árvore binária não valem muito a pena, pois o tempo de carregamento é muito maior enquanto o tempo de busca não recompensa. Já na árvore TRIE, mesmo o tempo de inserção ser baixo, ainda é custoso o tempo de procura.
+
+\subsection{Arquivo de 122KB}
+Na tabela abaixo, mostramos a procura de uma palavra em um arquivo de 122KB, sendo a palavra existente.
+
+\begin{table}[!h]
+\centering
+    \begin{minipage}{0.7\hsize}
+    \caption{Procura de uma palavra em 122KB}
+\begin{tabular}{ccc}
+\rowcolor[HTML]{FFCCC9}
+Estrutura       & \multicolumn{1}{l}{\cellcolor[HTML]{FFCCC9}Tempo Carregamento} & \multicolumn{1}{l}{\cellcolor[HTML]{FFCCC9}Tempo de Busca} \\
+\rowcolor[HTML]{C0C0C0}
+Lista Encadeada & 24 ms                                                          & 24.109 ms                                                  \\
+\rowcolor[HTML]{FFCCC9}
+Árvore Binária  & 63 ms                                                          & 36.661 ms                                                  \\
+\rowcolor[HTML]{C0C0C0}
+Árvore AVL      & 74 ms                                                          & 22.363 ms                                                  \\
+\rowcolor[HTML]{FFCCC9}
+Árvore TRIE     & 0,1 ms                                                         & 117.354 ms.
+\end{tabular}
+\end{minipage}
+\end{table}
+
+    Através das informações é possível concluir que a lista encadeada ainda não é totalmente ineficaz em comparação as árvores. No entanto, a árvore TRIES começa a demonstrar superioridade de carregamento em relação as outras.
+
+    Como o esperado, a árvore AVL é a que demora menos tempo para procurar, devido a sua inserção ordenar as informações através de funções de rotação.
+
+\subsection{Arquivo de 4,5MB}
+Na tabela abaixo, mostramos a procura de uma palavra em um arquivo maior, sendo a palavra existente.
+
+\begin{table}[h!]
+    \centering
+    \begin{minipage}{0.7\hsize}
+    \caption{Procura de uma palavra em 4,5MB}
+\begin{tabular}{ccc}
+\rowcolor[HTML]{FFCCC9}
+Estrutura       & \multicolumn{1}{l}{\cellcolor[HTML]{FFCCC9}Tempo Carregamento} & \multicolumn{1}{l}{\cellcolor[HTML]{FFCCC9}Tempo de Busca} \\
+\rowcolor[HTML]{C0C0C0}
+Lista Encadeada & 896 ms                                                         & 761.448 ms                                                 \\
+\rowcolor[HTML]{FFCCC9}
+Árvore Binária  & 1427 ms                                                        & 627.547 ms                                                 \\
+\rowcolor[HTML]{C0C0C0}
+Árvore AVL      & 1991 ms                                                        & 586.211 ms                                                 \\
+\rowcolor[HTML]{FFCCC9}
+Árvore TRIE     & 0,1 ms                                                         & 1728.18 ms.
+\end{tabular}
+\end{minipage}
+\end{table}
+
+Por fim, essa tabela demostra que a árvore TRIES é a mais eficiente para inserção,e acaba valendo a pena, mesmo com o maior tempo de busca. Nisso também já mostra que a lista encadeada se torna ineficiente, por ter grandes tempos de busca e de carregamento.
+
+% ---
+% Conclusão
+% ---
+\chapter*[Conclusão]{Conclusão}
+\addcontentsline{toc}{chapter}{Conclusão}
+
+É imprescindível, para um aluno de computação, o entendimento de como Equações Diferenciais Ordinárias podem ser resolvidas facilmente com o auxília de um software computacional. Além disso, com a experiência adquirida no decorrer do estudo, problemas posteriores encontrados durante a vida acadêmica serão mais facilmente resolvidos.
+
+A partir do estudo, uma certeza maior ressoa: a de que o conhecimento gera sede por conhecimento, e que esse estudo é apenas o início de uma longa jornada no ramo computacional.
+
+
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+
+% ----------------------------------------------------------
+% Referências bibliográficas
+% ----------------------------------------------------------
+
+
+
+\bibliography{Biblioteca.bib}
+
+
+ %% REFERENCIA AO ARQUIVO abntex2-modelo-references.bib
+
+
+
+\end{document}
